@@ -1,9 +1,7 @@
 import { useEffect, useRef } from 'react';
-import { FaSteam } from 'react-icons/fa6';
 import { LuFlashlight } from 'react-icons/lu';
 import { Button } from '../../components/Button/Button';
 import { LanguageSwitch } from '../../components/LanguageSwitch/LanguageSwitch';
-import { links } from '../../content/site';
 import { pathFor, useI18n } from '../../i18n/I18nProvider';
 import { gsap, useGSAP } from '../../lib/gsap';
 import { prefersReducedMotion, useFinePointer } from '../../lib/media';
@@ -142,8 +140,8 @@ export function NotFound() {
         <p className="nf__body">{t.notFound.body}</p>
         <div className="actions">
           <Button href={home}>{t.notFound.home}</Button>
-          <Button href={links.steam} variant="secondary" icon={<FaSteam />}>
-            {t.common.getOnSteam}
+          <Button href={`${home}#projects`} variant="secondary">
+            {t.common.seeProjects}
           </Button>
         </div>
         <p className="nf__hint mono">

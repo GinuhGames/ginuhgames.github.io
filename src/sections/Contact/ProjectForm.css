@@ -79,23 +79,152 @@
   font-size: 0.875rem;
 }
 
-/* Project type chips */
-.pform__types {
+/* Budget: a power meter that charges up to the chosen range */
+.budget {
   border: 0;
   padding: 0;
   margin: 0;
   min-width: 0;
+  display: grid;
+  gap: 12px;
 }
 
-.pform__types legend {
+.budget legend {
   padding: 0;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.pform__chips {
+.budget__meter {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: end;
+  gap: 6px;
+}
+
+.budget__tier {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.budget__tier input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.budget__bar {
+  display: block;
+  height: calc(14px + var(--i) * 9px);
+  border-radius: 5px;
+  background: rgb(244 245 248 / 0.07);
+  box-shadow: inset 0 0 0 1px rgb(244 245 248 / 0.14);
+  transition:
+    background-color 220ms ease,
+    box-shadow 220ms ease,
+    transform var(--press) var(--ease-out);
+}
+
+/* Charging runs bottom tier first, like a game's power bar. */
+.budget__tier[data-on] .budget__bar {
+  background: var(--orange);
+  box-shadow: inset 0 0 0 1px var(--orange), 0 0 18px -4px rgb(230 115 71 / 0.7);
+  transition-delay: calc(var(--i) * 45ms);
+}
+
+.budget__tier:active .budget__bar {
+  transform: scaleY(0.92);
+  transform-origin: bottom;
+}
+
+.budget__tier:has(input:focus-visible) .budget__bar {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.budget__short {
+  justify-self: center;
+  color: var(--text-subtle);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  transition: color 200ms ease;
+}
+
+.budget__tier[data-on] .budget__short {
+  color: var(--paper);
+}
+
+/* Hovering previews the charge up to that range. */
+@media (hover: hover) and (pointer: fine) {
+  .budget__meter:has(.budget__tier:nth-child(1):hover) .budget__tier:nth-child(-n + 1):not([data-on]) .budget__bar,
+  .budget__meter:has(.budget__tier:nth-child(2):hover) .budget__tier:nth-child(-n + 2):not([data-on]) .budget__bar,
+  .budget__meter:has(.budget__tier:nth-child(3):hover) .budget__tier:nth-child(-n + 3):not([data-on]) .budget__bar,
+  .budget__meter:has(.budget__tier:nth-child(4):hover) .budget__tier:nth-child(-n + 4):not([data-on]) .budget__bar,
+  .budget__meter:has(.budget__tier:nth-child(5):hover) .budget__tier:nth-child(-n + 5):not([data-on]) .budget__bar {
+    background: rgb(230 115 71 / 0.3);
+    box-shadow: inset 0 0 0 1px rgb(230 115 71 / 0.6);
+  }
+}
+
+.budget__foot {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgb(244 245 248 / 0.1);
+}
+
+.budget__readout {
+  color: var(--orange);
+  font-size: 0.875rem;
+}
+
+.budget__readout[data-empty] {
+  color: var(--text-subtle);
+}
+
+/* Privacy consent */
+.pform__consent {
+  display: grid;
+  gap: 10px;
+}
+
+.consent {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  font-size: 0.9375rem;
+  color: var(--paper);
+  cursor: pointer;
+}
+
+.pform .consent {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--paper);
+}
+
+.consent input {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--orange);
+  cursor: pointer;
+}
+
+.consent .text-link {
+  background-size: 100% 1px;
+}
+
+.pform__consent .pform__note {
+  line-height: 1.5;
 }
 
 .chip {

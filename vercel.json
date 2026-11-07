@@ -4,7 +4,12 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "trailingSlash": false,
-  "rewrites": [{ "source": "/:lang(es|ca)", "destination": "/index.html" }],
+  "rewrites": [
+    { "source": "/:lang(es|ca)", "destination": "/index.html" },
+    { "source": "/:page(privacy|legal)", "destination": "/legal.html" },
+    { "source": "/es/:page(privacidad|aviso-legal)", "destination": "/legal.html" },
+    { "source": "/ca/:page(privacitat|avis-legal)", "destination": "/legal.html" }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

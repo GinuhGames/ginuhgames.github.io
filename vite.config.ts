@@ -53,8 +53,31 @@ function localApi(): Plugin {
   };
 }
 
+/** The legal pages' addresses (src/content/legal.ts), served from legal.html like vercel.json does. */
+const LEGAL_PATH = /^\/(privacy|legal|es\/(privacidad|aviso-legal)|ca\/(privacitat|avis-legal))\/?$/;
+
+function legalPages(): Plugin {
+  return {
+    name: 'ginuh-legal-pages',
+    configureServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        const path = (req.url ?? '').split(/[?#]/)[0];
+        if (LEGAL_PATH.test(path)) req.url = '/legal.html';
+        next();
+      });
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        const path = (req.url ?? '').split(/[?#]/)[0];
+        if (LEGAL_PATH.test(path)) req.url = '/legal.html';
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), localApi()],
+  plugins: [react(), localApi(), legalPages()],
   server: {
     port: 5173,
     host: true,
@@ -65,6 +88,7 @@ export default defineConfig({
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
         notFound: resolve(import.meta.dirname, '404.html'),
+        legal: resolve(import.meta.dirname, 'legal.html'),
       },
     },
   },

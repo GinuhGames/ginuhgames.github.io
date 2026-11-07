@@ -77,8 +77,17 @@ const I18nContext = createContext<I18nValue | null>(null);
  * `syncUrl` is off on the 404 page: its address must stay as the visitor typed it,
  * so switching language there only swaps the copy.
  */
-export function I18nProvider({ children, syncUrl = true }: { children: ReactNode; syncUrl?: boolean }) {
-  const [locale, setLocaleState] = useState<Locale>(detectLocale);
+export function I18nProvider({
+  children,
+  syncUrl = true,
+  initialLocale,
+}: {
+  children: ReactNode;
+  syncUrl?: boolean;
+  /** A page whose address already names its language (the legal pages). */
+  initialLocale?: Locale;
+}) {
+  const [locale, setLocaleState] = useState<Locale>(() => initialLocale ?? detectLocale());
   const localeRef = useRef(locale);
 
   // Keep the address bar, <html lang> and the meta tags in step with the language.

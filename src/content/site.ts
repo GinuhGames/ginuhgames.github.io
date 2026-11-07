@@ -1,11 +1,14 @@
 /**
- * Language-independent data: links, networks and the team.
+ * Language-independent data: links, networks, the team and the company.
  * Every visible sentence lives in src/i18n/{en,es,ca}.ts.
  */
 
 export const links = {
-  steam: 'https://store.steampowered.com/app/3051520/Unlighted/',
-  steamDemo: 'https://store.steampowered.com/app/3051540/Unlighted_Demo/',
+  /** Every Ginuh Games release on Steam. Swap for the Steam developer page once it exists. */
+  steamStudio: 'https://store.steampowered.com/search/?developer=Ginuh%20Games',
+  unlighted: 'https://store.steampowered.com/app/3051520/Unlighted/',
+  unlightedDemo: 'https://store.steampowered.com/app/3051540/Unlighted_Demo/',
+  witchYou: 'https://store.steampowered.com/app/4657830/Witch_You/',
   soundtrack: 'https://open.spotify.com/album/2Ke1FSp1KWR8q8WFX9wmQR',
   kickstarter: 'https://www.kickstarter.com/projects/ginuhgames/unlighted',
   discord: 'https://discord.gg/gKbK4HBPng',
@@ -24,7 +27,7 @@ export type SocialId =
   | 'kickstarter';
 
 export const socials: { id: SocialId; label: string; href: string }[] = [
-  { id: 'steam', label: 'Steam', href: links.steam },
+  { id: 'steam', label: 'Steam', href: links.steamStudio },
   { id: 'discord', label: 'Discord', href: links.discord },
   { id: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@ginuhgames?sub_confirmation=1' },
   { id: 'tiktok', label: 'TikTok', href: 'https://www.tiktok.com/@ginuhgames' },
@@ -34,11 +37,31 @@ export const socials: { id: SocialId; label: string; href: string }[] = [
   { id: 'kickstarter', label: 'Kickstarter', href: links.kickstarter },
 ];
 
-export const sectionIds = ['unlighted', 'studio', 'team', 'services', 'contact'] as const;
+export const sectionIds = ['projects', 'studio', 'team', 'contact'] as const;
 export type SectionId = (typeof sectionIds)[number];
 
+/** What the studio makes on demand, listed in the on-demand projects block. */
 export const serviceIds = ['games', 'microgames', 'interactive', 'gamification'] as const;
 export type ServiceId = (typeof serviceIds)[number];
+
+/** Budget ranges in the request form, lowest first. `unsure` sits apart from the scale. */
+export const budgetTiers = [
+  { id: 'under5', short: '< 5k' },
+  { id: '5to10', short: '5–10k' },
+  { id: '10to20', short: '10–20k' },
+  { id: '20to50', short: '20–50k' },
+  { id: 'over50', short: '50k +' },
+] as const;
+export type BudgetId = (typeof budgetTiers)[number]['id'] | 'unsure';
+
+/** The company behind the site, as the legal notice and privacy policy name it. */
+export const company = {
+  name: 'Ginuh Games, S.C.P.',
+  nif: 'J55407621',
+  street: 'Calle Valencia, 19, planta 1, puerta 1',
+  city: '08242 Manresa (Barcelona)',
+  country: { en: 'Spain', es: 'España', ca: 'Espanya' },
+} as const;
 
 export type MemberId = 'juande' | 'erik' | 'david';
 

@@ -10,14 +10,15 @@
  * Locally (no key, not on Vercel) the request is validated and logged instead of sent.
  */
 
-const PROJECT_TYPES = {
-  games: 'Juegos a medida',
-  microgames: 'Microjuegos',
-  interactive: 'Actividades interactivas',
-  gamification: 'Gamificación',
-  other: 'Otra cosa',
+const BUDGETS = {
+  under5: 'Menos de 5.000 €',
+  '5to10': 'De 5.000 a 10.000 €',
+  '10to20': 'De 10.000 a 20.000 €',
+  '20to50': 'De 20.000 a 50.000 €',
+  over50: 'Más de 50.000 €',
+  unsure: 'No lo sabe todavía',
 } as const;
-type ProjectType = keyof typeof PROJECT_TYPES;
+type Budget = keyof typeof BUDGETS;
 
 const LANGUAGES = { en: 'Inglés', es: 'Castellano', ca: 'Catalán' } as const;
 type Language = keyof typeof LANGUAGES;
@@ -73,22 +74,23 @@ export async function POST(request: Request) {
   const email = text(data.email, LIMITS.email);
   const company = text(data.company, LIMITS.company);
   const message = text(data.message, LIMITS.message);
-  const types = Array.isArray(data.types)
-    ? [...new Set(data.types.filter((type): type is ProjectType => typeof type === 'string' && type in PROJECT_TYPES))]
-    : [];
+  const budget = typeof data.budget === 'string' && data.budget in BUDGETS ? (data.budget as Budget) : null;
   const language: Language =
     typeof data.locale === 'string' && data.locale in LANGUAGES ? (data.locale as Language) : 'en';
 
-  if (!name || !EMAIL.test(email) || !message) return json(422, { ok: false, error: 'invalid' });
+  // The form only sends once the visitor has accepted the privacy policy.
+  if (!name || !EMAIL.test(email) || !message || !budget || data.consent !== true) {
+    return json(422, { ok: false, error: 'invalid' });
+  }
 
-  const typeLabels = types.map((type) => PROJECT_TYPES[type]);
-  const subject = `Nueva solicitud de proyecto${typeLabels.length ? `: ${typeLabels.join(', ')}` : ''} — ${name}`;
+  const subject = `Nueva solicitud de proyecto (${BUDGETS[budget]}) — ${name}`;
   const rows: [string, string][] = [
     ['Nombre', name],
     ['Correo', email],
     ...(company ? ([['Empresa', company]] as [string, string][]) : []),
-    ...(typeLabels.length ? ([['Tipo de proyecto', typeLabels.join(', ')]] as [string, string][]) : []),
+    ['Presupuesto', BUDGETS[budget]],
     ['Idioma de la web', LANGUAGES[language]],
+    ['Privacidad', `Aceptada el ${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}`],
   ];
 
   const plain = [

@@ -1,24 +1,72 @@
+import type { ProjectCopy, ProjectId } from '../content/projects';
+import type { BudgetId } from '../content/site';
 import type { Dictionary } from './en';
+
+const projectItems: Record<ProjectId, ProjectCopy> = {
+  unlighted: {
+    tag: 'Mejor Juego · PIXEL Awards 2024',
+    summary:
+      'Un juego de puzles en primera persona ambientado en un mundo distópico que refleja el umbral entre el recuerdo y el olvido. Encarnas a un sujeto de pruebas de Umbral Alchemy, una empresa que investiga piedras con propiedades misteriosas: materiales extraños que solo toman forma cuando les alcanza un rayo de luz.',
+    facts: [
+      { term: 'Género', detail: 'Puzles en primera persona' },
+      { term: 'Lanzamiento', detail: '6 de junio de 2025' },
+      { term: 'Plataforma', detail: 'Windows · Steam' },
+      { term: 'Idiomas', detail: 'Inglés, castellano, catalán' },
+    ],
+    artAlt:
+      'Arte principal de Unlighted: un escritorio iluminado por una lámpara, lleno de informes de investigación de Umbral Alchemy, junto a un cristal oscuro.',
+    primary: 'Consigue Unlighted en Steam',
+    secondary: 'Juega la demo gratis',
+    soundtrack: 'Escucha la banda sonora en Spotify',
+    awards: [
+      { result: 'Ganador', title: 'Mejor Juego', event: 'PIXEL Awards 2024' },
+      { result: 'Finalista', title: 'Premio del Público al Mejor Juego Catalán', event: 'SAGA Awards 2025' },
+      { result: 'Financiado', title: 'Gracias a nuestra comunidad', event: 'Kickstarter' },
+    ],
+  },
+  'witch-you': {
+    tag: 'Próximamente en Steam',
+    summary:
+      'Un juego cooperativo en primera persona en el que tú y tu compañero sois dos brujas al frente de vuestra propia botica. Restauradla, mejoradla y mantenedla abierta tantos días como podáis, viajando al Infierno de Dante en busca de los ingredientes de vuestras pociones.',
+    facts: [
+      { term: 'Género', detail: 'Gestión roguelike' },
+      { term: 'Jugadores', detail: 'Cooperativo online' },
+      { term: 'Lanzamiento', detail: 'Por anunciar' },
+      { term: 'Plataforma', detail: 'Windows · Steam' },
+    ],
+    artAlt:
+      'Captura de Witch You! en el Infierno de Dante: un árbol pálido y retorcido bajo un cielo de formas blancas y carmesí, rodeado de siluetas de almas.',
+    primary: 'Añadir a mi lista de deseados',
+  },
+};
+
+const budget: Record<BudgetId, string> = {
+  under5: 'Menos de 5.000 €',
+  '5to10': 'De 5.000 a 10.000 €',
+  '10to20': 'De 10.000 a 20.000 €',
+  '20to50': 'De 20.000 a 50.000 €',
+  over50: 'Más de 50.000 €',
+  unsure: 'No lo sé todavía',
+};
 
 export const es: Dictionary = {
   meta: {
     title: 'Ginuh Games — Estudio independiente de videojuegos de Barcelona',
     description:
-      'Ginuh Games es un estudio independiente de videojuegos de Barcelona. Creamos nuestros propios juegos, como Unlighted, y desarrollamos juegos, microjuegos, actividades interactivas y gamificaciones a medida.',
+      'Ginuh Games es un estudio independiente de videojuegos de Barcelona. Creamos nuestros propios juegos, como Unlighted y Witch You!, y desarrollamos juegos, microjuegos, actividades interactivas y gamificaciones a medida.',
   },
   common: {
     newTab: '(se abre en una pestaña nueva)',
-    getOnSteam: 'Consigue Unlighted en Steam',
-    playDemo: 'Juega la demo gratis',
+    seeProjects: 'Ver nuestros proyectos',
+    steamGames: 'Nuestros juegos en Steam',
     startProject: 'Empieza un proyecto',
     skip: 'Saltar al contenido',
   },
   nav: {
     sections: {
-      unlighted: 'Unlighted',
+      projects: 'Proyectos',
       studio: 'Estudio',
       team: 'Equipo',
-      services: 'Servicios',
       contact: 'Contacto',
     },
     home: 'Ginuh Games, volver arriba',
@@ -31,26 +79,23 @@ export const es: Dictionary = {
   hero: {
     lead: 'Un estudio independiente de videojuegos de Barcelona. Creamos nuestros propios juegos y desarrollamos juegos, microjuegos y experiencias interactivas a medida.',
   },
-  game: {
-    summary:
-      'Un juego de puzles en primera persona ambientado en un mundo distópico que refleja el umbral entre el recuerdo y el olvido. Encarnas a un sujeto de pruebas de Umbral Alchemy, una empresa que investiga piedras con propiedades misteriosas: materiales extraños que solo toman forma cuando les alcanza un rayo de luz.',
-    facts: [
-      { term: 'Género', detail: 'Puzles en primera persona' },
-      { term: 'Lanzamiento', detail: '6 de junio de 2025' },
-      { term: 'Plataforma', detail: 'Windows · Steam' },
-      { term: 'Idiomas', detail: 'Inglés, castellano, catalán' },
-    ],
-    soundtrack: 'Escucha la banda sonora en Spotify',
+  projects: {
+    ownTitle: 'Nuestros proyectos',
+    steamAll: 'Todos nuestros juegos en Steam',
+    onDemandTitle: 'Proyectos bajo demanda',
+    onDemandIntro:
+      'Además de nuestros propios juegos, diseñamos y desarrollamos proyectos a medida. Desde un juego completo hasta un microjuego para una campaña, una actividad interactiva o una experiencia gamificada: nos encargamos de todo, del concepto y el diseño al arte, la programación y el sonido.',
+    servicesLabel: 'Qué hacemos',
+    services: {
+      games: 'Juegos a medida',
+      microgames: 'Microjuegos',
+      interactive: 'Actividades interactivas',
+      gamification: 'Gamificación',
+    },
     hintPointer: 'Mueve el cursor por la imagen para iluminarla',
     hintTouch: 'Desplázate o toca la imagen para iluminarla',
-    artAlt:
-      'Arte principal de Unlighted: un escritorio iluminado por una lámpara, lleno de informes de investigación de Umbral Alchemy, junto a un cristal oscuro.',
     awardsLabel: 'Reconocimientos',
-    awards: [
-      { result: 'Ganador', title: 'Mejor Juego', event: 'PIXEL Awards 2024' },
-      { result: 'Finalista', title: 'Premio del Público al Mejor Juego Catalán', event: 'SAGA Awards 2025' },
-      { result: 'Financiado', title: 'Gracias a nuestra comunidad', event: 'Kickstarter' },
-    ],
+    items: projectItems,
   },
   studio: {
     title: 'Un pequeño estudio donde la imaginación se convierte en juego.',
@@ -75,45 +120,27 @@ export const es: Dictionary = {
     },
     socialLabel: (name: string, network: string) => `${name} en ${network}`,
   },
-  services: {
-    title: 'Tu proyecto, convertido en juego.',
-    intro:
-      'Además de nuestros propios juegos, diseñamos y desarrollamos proyectos a medida. Desde un juego completo hasta un microjuego para una campaña, una actividad interactiva o una experiencia gamificada: nos encargamos de todo, del concepto y el diseño al arte, la programación y el sonido.',
-    items: {
-      games: {
-        title: 'Juegos a medida',
-        body: 'Videojuegos completos diseñados a partir de tu idea, tu marca o tu historia, del primer prototipo al lanzamiento.',
-      },
-      microgames: {
-        title: 'Microjuegos',
-        body: 'Juegos cortos y jugables al instante para campañas, eventos, webs y redes sociales.',
-      },
-      interactive: {
-        title: 'Actividades interactivas',
-        body: 'Experiencias lúdicas para museos, aulas, ferias y exposiciones, en las que se aprende jugando.',
-      },
-      gamification: {
-        title: 'Gamificación',
-        body: 'Mecánicas de juego aplicadas a la formación, el onboarding o la fidelización, para que la gente quiera participar.',
-      },
-    },
-    pick: 'Solicitar',
-  },
   contact: {
     title: 'Hablemos',
-    intro: '¿Tienes un proyecto en mente, una pregunta sobre Unlighted o simplemente quieres saludarnos? Escríbenos.',
+    intro: '¿Tienes un proyecto en mente, una pregunta sobre nuestros juegos o simplemente quieres saludarnos? Escríbenos.',
     form: {
       title: 'Cuéntanos tu proyecto',
       name: 'Nombre',
       email: 'Correo electrónico',
       company: 'Empresa u organización',
       optional: 'opcional',
-      type: '¿Qué necesitas?',
-      other: 'Otra cosa',
-      message: 'Háblanos de la idea, los plazos y el presupuesto',
+      budgetLegend: 'Presupuesto disponible',
+      budget,
+      budgetRequired: 'Elige un rango de presupuesto.',
+      message: 'Háblanos de la idea y de los plazos',
+      consentBefore: 'He leído y acepto la',
+      consentLink: 'política de privacidad',
+      consentAfter: '.',
+      consentRequired: 'Acepta la política de privacidad para enviar tu solicitud.',
+      privacy:
+        'Ginuh Games, S.C.P. usará tus datos solo para responder a tu solicitud, con tu consentimiento. Solo acceden a ellos nuestros proveedores de alojamiento y de correo. Puedes consultarlos, rectificarlos o suprimirlos cuando quieras escribiendo a ginuhgames@gmail.com.',
       submit: 'Enviar solicitud',
       sending: 'Enviando…',
-      privacy: 'Solo usaremos estos datos para responder a tu solicitud.',
       required: 'Rellena este campo.',
       invalidEmail: 'Introduce un correo electrónico válido.',
       sentTitle: 'Solicitud enviada',
@@ -128,7 +155,7 @@ export const es: Dictionary = {
         name: 'Nombre',
         email: 'Correo',
         company: 'Empresa',
-        type: 'Tipo de proyecto',
+        budget: 'Presupuesto',
         message: 'Mensaje',
       },
     },
@@ -145,9 +172,12 @@ export const es: Dictionary = {
   },
   footer: {
     nav: 'Pie de página',
+    legal: 'Información legal',
     rights: 'Todos los derechos reservados.',
     made: 'Hecho con cariño en Barcelona.',
     top: 'Volver arriba',
+    privacyLink: 'Política de privacidad',
+    legalLink: 'Aviso legal',
   },
   notFound: {
     metaTitle: 'Página no encontrada — Ginuh Games',

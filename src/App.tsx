@@ -4,10 +4,9 @@ import { ScrollTrigger } from './lib/gsap';
 import { I18nProvider, useI18n } from './i18n/I18nProvider';
 import { Nav } from './components/Nav/Nav';
 import { Hero } from './sections/Hero/Hero';
-import { Unlighted } from './sections/Unlighted/Unlighted';
+import { Projects } from './sections/Projects/Projects';
 import { Studio } from './sections/Studio/Studio';
 import { Team } from './sections/Team/Team';
-import { Services } from './sections/Services/Services';
 import { Contact } from './sections/Contact/Contact';
 import { Footer } from './sections/Footer/Footer';
 
@@ -22,16 +21,15 @@ function Page() {
 
   return (
     <>
-      <a className="skip-link" href="#unlighted">
+      <a className="skip-link" href="#projects">
         {t.common.skip}
       </a>
       <Nav />
       <main>
         <Hero />
-        <Unlighted />
+        <Projects />
         <Studio />
         <Team />
-        <Services />
         <Contact />
       </main>
       <Footer />

@@ -1,9 +1,7 @@
 import { useRef } from 'react';
-import { FaSteam } from 'react-icons/fa6';
 import LightRays from '../../components/reactbits/LightRays/LightRays';
 import SplitText from '../../components/reactbits/SplitText/SplitText';
 import { Button } from '../../components/Button/Button';
-import { links } from '../../content/site';
 import { useI18n } from '../../i18n/I18nProvider';
 import { gsap, useGSAP } from '../../lib/gsap';
 import { prefersReducedMotion } from '../../lib/media';
@@ -88,9 +86,7 @@ export function Hero() {
             {t.hero.lead}
           </p>
           <div className="actions" data-hero-in>
-            <Button href={links.steam} icon={<FaSteam />}>
-              {t.common.getOnSteam}
-            </Button>
+            <Button href="#projects">{t.common.seeProjects}</Button>
             <Button href="#contact" variant="secondary">
               {t.common.startProject}
             </Button>

@@ -1,8 +1,14 @@
-import { localeNames, locales, pathFor, useI18n } from '../../i18n/I18nProvider';
+import { localeNames, locales, pathFor, useI18n, type Locale } from '../../i18n/I18nProvider';
 import './LanguageSwitch.css';
 
+type Props = {
+  className?: string;
+  /** Address of this same page in another language. The home page by default. */
+  hrefFor?: (locale: Locale) => string;
+};
+
 /** Real links (crawlable, open in a new tab), switched in place on a plain click. */
-export function LanguageSwitch({ className = '' }: { className?: string }) {
+export function LanguageSwitch({ className = '', hrefFor = pathFor }: Props) {
   const { locale, setLocale, t } = useI18n();
 
   return (
@@ -11,7 +17,7 @@ export function LanguageSwitch({ className = '' }: { className?: string }) {
         {locales.map((code) => (
           <li key={code}>
             <a
-              href={pathFor(code)}
+              href={hrefFor(code)}
               hrefLang={code}
               lang={code}
               title={localeNames[code]}

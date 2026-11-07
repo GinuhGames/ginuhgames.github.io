@@ -1,5 +1,6 @@
 import { useLenis } from 'lenis/react';
 import { LuArrowUp } from 'react-icons/lu';
+import { legalPaths } from '../../content/legal';
 import { links, sectionIds } from '../../content/site';
 import { useI18n } from '../../i18n/I18nProvider';
 import { LanguageSwitch } from '../../components/LanguageSwitch/LanguageSwitch';
@@ -7,7 +8,7 @@ import wordmark from '../../assets/images/ginuh-wordmark.webp';
 import './Footer.css';
 
 export function Footer() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const lenis = useLenis();
   const year = new Date().getFullYear();
 
@@ -30,7 +31,7 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <a href={links.steam} target="_blank" rel="noopener noreferrer">
+                <a href={links.steamStudio} target="_blank" rel="noopener noreferrer">
                   Steam
                 </a>
               </li>
@@ -53,6 +54,16 @@ export function Footer() {
             © {year} Ginuh Games. {t.footer.rights}
           </p>
           <LanguageSwitch />
+          <nav aria-label={t.footer.legal}>
+            <ul role="list" className="footer__legal">
+              <li>
+                <a href={legalPaths.privacy[locale]}>{t.footer.privacyLink}</a>
+              </li>
+              <li>
+                <a href={legalPaths.legal[locale]}>{t.footer.legalLink}</a>
+              </li>
+            </ul>
+          </nav>
           <p>{t.footer.made}</p>
         </div>
       </div>

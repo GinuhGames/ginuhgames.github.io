@@ -78,6 +78,24 @@
   font-size: 0.875rem;
 }
 
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+}
+
+.footer__legal a {
+  display: inline-block;
+  padding-block: 8px;
+  transition: color 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer__legal a:hover {
+    color: var(--paper);
+  }
+}
+
 @media (max-width: 960px) {
   .footer__top {
     grid-template-columns: 1fr;

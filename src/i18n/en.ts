@@ -1,23 +1,72 @@
+import type { ProjectCopy, ProjectId } from '../content/projects';
+import type { BudgetId } from '../content/site';
+
+const projectItems: Record<ProjectId, ProjectCopy> = {
+  unlighted: {
+    tag: 'Best Game · PIXEL Awards 2024',
+    summary:
+      'A first-person puzzle game set in a dystopian world that reflects the threshold between memory and oblivion. You work as a test subject for Umbral Alchemy, a company researching stones with mysterious properties: strange materials that only take shape when a ray of light hits them.',
+    facts: [
+      { term: 'Genre', detail: 'First-person puzzle' },
+      { term: 'Released', detail: '6 June 2025' },
+      { term: 'Platform', detail: 'Windows · Steam' },
+      { term: 'Languages', detail: 'English, Spanish, Catalan' },
+    ],
+    artAlt:
+      'Unlighted key art: a desk lit by a lamp, covered in Umbral Alchemy research files, next to a dark crystal.',
+    primary: 'Get Unlighted on Steam',
+    secondary: 'Play the free demo',
+    soundtrack: 'Listen to the soundtrack on Spotify',
+    awards: [
+      { result: 'Winner', title: 'Best Game', event: 'PIXEL Awards 2024' },
+      { result: 'Finalist', title: 'Audience Award for Best Catalan Game', event: 'SAGA Awards 2025' },
+      { result: 'Funded', title: 'Backed by our community', event: 'Kickstarter' },
+    ],
+  },
+  'witch-you': {
+    tag: 'Coming soon to Steam',
+    summary:
+      "A first-person co-op game where you and a partner are two witches running your own apothecary. Restore the shop, upgrade it and keep it open for as many days as you can, travelling to Dante's Inferno for the ingredients your potions need.",
+    facts: [
+      { term: 'Genre', detail: 'Roguelike management' },
+      { term: 'Players', detail: 'Online co-op' },
+      { term: 'Release', detail: 'To be announced' },
+      { term: 'Platform', detail: 'Windows · Steam' },
+    ],
+    artAlt:
+      "Witch You! in-game capture of Dante's Inferno: a pale, twisted tree under a sky of white and crimson shapes, surrounded by silhouetted souls.",
+    primary: 'Add to your Steam wishlist',
+  },
+};
+
+const budget: Record<BudgetId, string> = {
+  under5: 'Under €5,000',
+  '5to10': '€5,000 to €10,000',
+  '10to20': '€10,000 to €20,000',
+  '20to50': '€20,000 to €50,000',
+  over50: 'Over €50,000',
+  unsure: "I don't know yet",
+};
+
 /** English — the source dictionary. es.ts and ca.ts must match its shape. */
 export const en = {
   meta: {
     title: 'Ginuh Games — Independent game studio from Barcelona',
     description:
-      'Ginuh Games is an independent video game studio from Barcelona. We make our own games, like Unlighted, and create custom games, microgames, interactive activities and gamification on demand.',
+      'Ginuh Games is an independent video game studio from Barcelona. We make our own games, like Unlighted and Witch You!, and create custom games, microgames, interactive activities and gamification on demand.',
   },
   common: {
     newTab: '(opens in a new tab)',
-    getOnSteam: 'Get Unlighted on Steam',
-    playDemo: 'Play the free demo',
+    seeProjects: 'See our projects',
+    steamGames: 'Our games on Steam',
     startProject: 'Start a project',
     skip: 'Skip to content',
   },
   nav: {
     sections: {
-      unlighted: 'Unlighted',
+      projects: 'Projects',
       studio: 'Studio',
       team: 'Team',
-      services: 'Services',
       contact: 'Contact',
     },
     home: 'Ginuh Games, back to top',
@@ -30,26 +79,23 @@ export const en = {
   hero: {
     lead: 'An independent video game studio from Barcelona. We make our own games, and custom games, microgames and interactive experiences on demand.',
   },
-  game: {
-    summary:
-      'A first-person puzzle game set in a dystopian world that reflects the threshold between memory and oblivion. You work as a test subject for Umbral Alchemy, a company researching stones with mysterious properties: strange materials that only take shape when a ray of light hits them.',
-    facts: [
-      { term: 'Genre', detail: 'First-person puzzle' },
-      { term: 'Released', detail: '6 June 2025' },
-      { term: 'Platform', detail: 'Windows · Steam' },
-      { term: 'Languages', detail: 'English, Spanish, Catalan' },
-    ],
-    soundtrack: 'Listen to the soundtrack on Spotify',
+  projects: {
+    ownTitle: 'Our projects',
+    steamAll: 'All our games on Steam',
+    onDemandTitle: 'On-demand projects',
+    onDemandIntro:
+      'Beyond our own games, we design and develop projects on demand. From a full game to a microgame for a campaign, an interactive activity or a gamified experience, we take care of everything: concept, design, art, programming and sound.',
+    servicesLabel: 'What we make',
+    services: {
+      games: 'Custom games',
+      microgames: 'Microgames',
+      interactive: 'Interactive activities',
+      gamification: 'Gamification',
+    },
     hintPointer: 'Move your cursor over the image to light it',
     hintTouch: 'Scroll or touch the image to light it',
-    artAlt:
-      'Unlighted key art: a desk lit by a lamp, covered in Umbral Alchemy research files, next to a dark crystal.',
     awardsLabel: 'Recognition',
-    awards: [
-      { result: 'Winner', title: 'Best Game', event: 'PIXEL Awards 2024' },
-      { result: 'Finalist', title: 'Audience Award for Best Catalan Game', event: 'SAGA Awards 2025' },
-      { result: 'Funded', title: 'Backed by our community', event: 'Kickstarter' },
-    ],
+    items: projectItems,
   },
   studio: {
     title: 'A little studio where imagination becomes play.',
@@ -74,45 +120,27 @@ export const en = {
     },
     socialLabel: (name: string, network: string) => `${name} on ${network}`,
   },
-  services: {
-    title: 'Your project, made playable.',
-    intro:
-      'Beyond our own games, we design and develop projects on demand. From a full game to a microgame for a campaign, an interactive activity or a gamified experience, we take care of everything: concept, design, art, programming and sound.',
-    items: {
-      games: {
-        title: 'Custom games',
-        body: 'Complete video games designed around your idea, brand or story, from the first prototype to release.',
-      },
-      microgames: {
-        title: 'Microgames',
-        body: 'Short, instantly playable games for campaigns, events, websites and social media.',
-      },
-      interactive: {
-        title: 'Interactive activities',
-        body: 'Playful experiences for museums, classrooms, fairs and exhibitions, where people learn by playing.',
-      },
-      gamification: {
-        title: 'Gamification',
-        body: 'Game mechanics applied to training, onboarding or loyalty, so people actually want to take part.',
-      },
-    },
-    pick: 'Request',
-  },
   contact: {
     title: 'Get in touch',
-    intro: 'Have a project in mind, a question about Unlighted or just want to say hi? Write to us.',
+    intro: 'Have a project in mind, a question about our games or just want to say hi? Write to us.',
     form: {
       title: 'Tell us about your project',
       name: 'Name',
       email: 'Email',
       company: 'Company or organization',
       optional: 'optional',
-      type: 'What do you need?',
-      other: 'Something else',
-      message: 'Tell us about the idea, timing and budget',
+      budgetLegend: 'Available budget',
+      budget,
+      budgetRequired: 'Choose a budget range.',
+      message: 'Tell us about the idea and the timing',
+      consentBefore: 'I have read and accept the',
+      consentLink: 'privacy policy',
+      consentAfter: '.',
+      consentRequired: 'Accept the privacy policy to send your request.',
+      privacy:
+        'Ginuh Games, S.C.P. will use your details only to answer your request, with your consent. Only our hosting and email providers handle them. You can access, correct or delete them at any time by writing to ginuhgames@gmail.com.',
       submit: 'Send request',
       sending: 'Sending…',
-      privacy: 'We only use these details to reply to your request.',
       required: 'Please fill in this field.',
       invalidEmail: 'Enter a valid email address.',
       sentTitle: 'Request sent',
@@ -127,7 +155,7 @@ export const en = {
         name: 'Name',
         email: 'Email',
         company: 'Company',
-        type: 'Project type',
+        budget: 'Budget',
         message: 'Message',
       },
     },
@@ -144,9 +172,12 @@ export const en = {
   },
   footer: {
     nav: 'Footer',
+    legal: 'Legal',
     rights: 'All rights reserved.',
     made: 'Made with care in Barcelona.',
     top: 'Back to top',
+    privacyLink: 'Privacy policy',
+    legalLink: 'Legal notice',
   },
   notFound: {
     metaTitle: 'Page not found — Ginuh Games',

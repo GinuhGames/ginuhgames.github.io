@@ -130,8 +130,8 @@ export function Nav() {
             ))}
           </ul>
           <div className="menu__foot">
-            <Button href={links.steam} icon={<FaSteam />}>
-              {t.common.getOnSteam}
+            <Button href={links.steamStudio} icon={<FaSteam />}>
+              {t.common.steamGames}
             </Button>
             <ul role="list" className="menu__socials">
               {socials.map((social) => {

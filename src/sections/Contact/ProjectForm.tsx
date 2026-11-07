@@ -1,17 +1,19 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react';
 import { LuCircleAlert, LuCircleCheck, LuLoaderCircle, LuSend } from 'react-icons/lu';
-import { links, serviceIds } from '../../content/site';
+import { legalPaths } from '../../content/legal';
+import { budgetTiers, links, type BudgetId } from '../../content/site';
 import { useI18n } from '../../i18n/I18nProvider';
-import { onProjectTypeSelected, type ProjectType } from './projectType';
 import './ProjectForm.css';
 
 type Values = { name: string; email: string; company: string; message: string };
-type Errors = Partial<Record<'name' | 'email' | 'message', string>>;
+type Field = 'name' | 'email' | 'budget' | 'message' | 'consent';
+type Errors = Partial<Record<Field, string>>;
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 const EMPTY: Values = { name: '', email: '', company: '', message: '' };
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const types: ProjectType[] = [...serviceIds, 'other'];
+/** Checked in this order; the first one wrong takes the focus. */
+const FIELDS: Field[] = ['name', 'email', 'budget', 'message', 'consent'];
 
 /**
  * Project request form. Requests go to /api/contact (a Vercel Function that emails
@@ -25,43 +27,38 @@ export function ProjectForm() {
   const statusRef = useRef<HTMLDivElement>(null);
   const openedAt = useRef(Date.now());
   const [values, setValues] = useState<Values>(EMPTY);
-  const [picked, setPicked] = useState<ProjectType[]>([]);
+  const [budget, setBudget] = useState<BudgetId | null>(null);
+  const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>('idle');
   const [sentTo, setSentTo] = useState({ name: '', email: '' });
   const [trap, setTrap] = useState('');
 
-  useEffect(
-    () =>
-      onProjectTypeSelected((type) => {
-        setStatus((current) => (current === 'sent' ? 'idle' : current));
-        setPicked((current) => (current.includes(type) ? current : [...current, type]));
-      }),
-    []
-  );
-
   useEffect(() => {
     if (status === 'sent') statusRef.current?.focus();
   }, [status]);
 
-  const typeLabel = (type: ProjectType) => (type === 'other' ? f.other : t.services.items[type].title);
+  const clear = (field: Field) => {
+    if (errors[field]) setErrors((current) => ({ ...current, [field]: undefined }));
+    if (status === 'error') setStatus('idle');
+  };
 
   const update = (field: keyof Values) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = event.target.value;
     setValues((current) => ({ ...current, [field]: value }));
-    if (field in errors) setErrors((current) => ({ ...current, [field]: undefined }));
-    if (status === 'error') setStatus('idle');
+    if (field !== 'company') clear(field);
   };
 
-  const toggle = (type: ProjectType) => {
-    setPicked((current) => (current.includes(type) ? current.filter((item) => item !== type) : [...current, type]));
+  const choose = (id: BudgetId) => {
+    setBudget(id);
+    clear('budget');
   };
 
   /** Fallback: the same request, ready to send from the visitor's email app. */
   const mailto = () => {
     const labels = f.fieldsLabel;
-    const chosen = picked.map(typeLabel);
-    const subject = `${f.subject}${chosen.length ? `: ${chosen.join(', ')}` : ''} — ${values.name.trim()}`;
+    const range = budget ? f.budget[budget] : '';
+    const subject = `${f.subject}${range ? ` (${range})` : ''} — ${values.name.trim()}`;
     const body = [
       f.bodyIntro,
       '',
@@ -71,7 +68,7 @@ export function ProjectForm() {
       `${labels.name}: ${values.name.trim()}`,
       `${labels.email}: ${values.email.trim()}`,
       values.company.trim() ? `${labels.company}: ${values.company.trim()}` : null,
-      chosen.length ? `${labels.type}: ${chosen.join(', ')}` : null,
+      range ? `${labels.budget}: ${range}` : null,
     ]
       .filter((line) => line !== null)
       .join('\n');
@@ -86,12 +83,18 @@ export function ProjectForm() {
     if (!values.name.trim()) next.name = f.required;
     if (!values.email.trim()) next.email = f.required;
     else if (!EMAIL.test(values.email.trim())) next.email = f.invalidEmail;
+    if (!budget) next.budget = f.budgetRequired;
     if (!values.message.trim()) next.message = f.required;
+    if (!consent) next.consent = f.consentRequired;
     setErrors(next);
 
-    const firstInvalid = (['name', 'email', 'message'] as const).find((field) => next[field]);
+    const firstInvalid = FIELDS.find((field) => next[field]);
     if (firstInvalid) {
-      formRef.current?.querySelector<HTMLElement>(`[name="${firstInvalid}"]`)?.focus();
+      const target =
+        firstInvalid === 'budget'
+          ? formRef.current?.querySelector<HTMLElement>('input[name="budget"]')
+          : formRef.current?.querySelector<HTMLElement>(`[name="${firstInvalid}"]`);
+      target?.focus();
       return;
     }
 
@@ -105,7 +108,8 @@ export function ProjectForm() {
           email: values.email.trim(),
           company: values.company.trim(),
           message: values.message.trim(),
-          types: picked,
+          budget,
+          consent,
           locale,
           website: trap,
           elapsed: Date.now() - openedAt.current,
@@ -122,7 +126,8 @@ export function ProjectForm() {
 
   const reset = () => {
     setValues(EMPTY);
-    setPicked([]);
+    setBudget(null);
+    setConsent(false);
     setErrors({});
     openedAt.current = Date.now();
     setStatus('idle');
@@ -141,16 +146,18 @@ export function ProjectForm() {
     );
   }
 
+  const describedBy = (name: Field) => (errors[name] ? `${uid}-${name}-error` : undefined);
+
   const field = (name: keyof Values) => ({
     id: `${uid}-${name}`,
     name,
     value: values[name],
     onChange: update(name),
-    'aria-invalid': name in errors && errors[name as keyof Errors] ? true : undefined,
-    'aria-describedby': errors[name as keyof Errors] ? `${uid}-${name}-error` : undefined,
+    'aria-invalid': name !== 'company' && errors[name] ? true : undefined,
+    'aria-describedby': name !== 'company' ? describedBy(name) : undefined,
   });
 
-  const error = (name: keyof Errors) =>
+  const error = (name: Field) =>
     errors[name] ? (
       <p className="pform__error" id={`${uid}-${name}-error`}>
         {errors[name]}
@@ -158,6 +165,8 @@ export function ProjectForm() {
     ) : null;
 
   const sending = status === 'sending';
+  // How far the meter is charged: the chosen tier and every one below it.
+  const level = budgetTiers.findIndex((tier) => tier.id === budget);
 
   return (
     <form ref={formRef} className="pform" onSubmit={submit} noValidate aria-busy={sending}>
@@ -198,22 +207,75 @@ export function ProjectForm() {
         />
       </div>
 
-      <fieldset className="pform__types">
-        <legend>{f.type}</legend>
-        <div className="pform__chips">
-          {types.map((type) => (
-            <label key={type} className="chip">
-              <input type="checkbox" checked={picked.includes(type)} onChange={() => toggle(type)} />
-              <span>{typeLabel(type)}</span>
+      {/* Budget as a power meter: each range charges the bars up to it. */}
+      <fieldset className="budget" aria-describedby={describedBy('budget')} aria-invalid={errors.budget ? true : undefined}>
+        <legend>{f.budgetLegend}</legend>
+        <div className="budget__meter" data-level={level}>
+          {budgetTiers.map((tier, index) => (
+            <label
+              key={tier.id}
+              className="budget__tier"
+              data-on={level >= index ? '' : undefined}
+              style={{ '--i': index } as CSSProperties}
+            >
+              <input
+                type="radio"
+                name="budget"
+                value={tier.id}
+                checked={budget === tier.id}
+                onChange={() => choose(tier.id)}
+              />
+              <span className="budget__bar" aria-hidden="true" />
+              <span className="budget__short mono" aria-hidden="true">
+                {tier.short}
+              </span>
+              <span className="sr-only">{f.budget[tier.id]}</span>
             </label>
           ))}
         </div>
+        <div className="budget__foot">
+          <p className="budget__readout mono" aria-hidden="true" data-empty={budget ? undefined : ''}>
+            {budget ? f.budget[budget] : '—'}
+          </p>
+          <label className="chip">
+            <input type="radio" name="budget" value="unsure" checked={budget === 'unsure'} onChange={() => choose('unsure')} />
+            <span>{f.budget.unsure}</span>
+          </label>
+        </div>
+        {error('budget')}
       </fieldset>
 
       <div className="pform__field">
         <label htmlFor={`${uid}-message`}>{f.message}</label>
         <textarea {...field('message')} rows={5} maxLength={5000} required />
         {error('message')}
+      </div>
+
+      <div className="pform__consent">
+        <label className="consent">
+          <input
+            type="checkbox"
+            name="consent"
+            checked={consent}
+            onChange={(event) => {
+              setConsent(event.target.checked);
+              clear('consent');
+            }}
+            aria-invalid={errors.consent ? true : undefined}
+            aria-describedby={describedBy('consent')}
+            required
+          />
+          <span>
+            {f.consentBefore}{' '}
+            <a className="text-link" href={legalPaths.privacy[locale]} target="_blank" rel="noopener">
+              {f.consentLink}
+              <span className="sr-only"> {t.common.newTab}</span>
+            </a>
+            {f.consentAfter}
+          </span>
+        </label>
+        {error('consent')}
+        <p className="pform__note">{f.privacy}</p>
       </div>
 
       {status === 'error' ? (
@@ -237,7 +299,6 @@ export function ProjectForm() {
             <LuSend className="btn__trail" aria-hidden="true" />
           )}
         </button>
-        <p className="pform__note">{f.privacy}</p>
       </div>
     </form>
   );
