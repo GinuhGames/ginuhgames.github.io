@@ -159,6 +159,14 @@ export const en = {
     made: 'Made with care in Barcelona.',
     top: 'Back to top',
   },
+  notFound: {
+    metaTitle: 'Page not found — Ginuh Games',
+    title: 'This room is empty.',
+    body: "The page you're looking for doesn't exist or has been moved. Even with the light on, there's nothing to find here.",
+    home: 'Back to home',
+    hintPointer: 'Move your cursor to light the room',
+    hintTouch: 'Touch the screen to light the room',
+  },
 };
 
 export type Dictionary = typeof en;

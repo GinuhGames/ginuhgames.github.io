@@ -23,6 +23,7 @@ Requiere Node 20.19+ (probado con Node 22).
 | Enlaces, redes, equipo, servicios | `src/content/site.ts` |
 | Paleta, tipografía, espaciado, curvas de animación | `src/styles/tokens.css` |
 | Secciones de la página | `src/sections/*` |
+| Página 404 (la sirve Vercel para cualquier URL que no existe) | `404.html`, `src/pages/NotFound/*` |
 | Componentes de React Bits (copiados, editables) | `src/components/reactbits/*` |
 | Imágenes (WebP optimizado) | `src/assets/images/*` |
 | Favicons, imagen para redes sociales, manifest | `public/` |

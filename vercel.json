@@ -3,10 +3,8 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "rewrites": [
-    { "source": "/:lang(es|ca)", "destination": "/index.html" },
-    { "source": "/:lang(es|ca)/:path*", "destination": "/index.html" }
-  ],
+  "trailingSlash": false,
+  "rewrites": [{ "source": "/:lang(es|ca)", "destination": "/index.html" }],
   "headers": [
     {
       "source": "/assets/(.*)",

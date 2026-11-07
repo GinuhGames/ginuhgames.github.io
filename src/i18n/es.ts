@@ -160,4 +160,12 @@ export const es: Dictionary = {
     made: 'Hecho con cariño en Barcelona.',
     top: 'Volver arriba',
   },
+  notFound: {
+    metaTitle: 'Página no encontrada — Ginuh Games',
+    title: 'Esta sala está vacía.',
+    body: 'La página que buscas no existe o se ha movido. Ni con la luz encendida hay nada que encontrar aquí.',
+    home: 'Volver al inicio',
+    hintPointer: 'Mueve el cursor para iluminar la sala',
+    hintTouch: 'Toca la pantalla para iluminar la sala',
+  },
 };

@@ -160,4 +160,12 @@ export const ca: Dictionary = {
     made: 'Fet amb estima a Barcelona.',
     top: 'Torna a dalt',
   },
+  notFound: {
+    metaTitle: 'Pàgina no trobada — Ginuh Games',
+    title: 'Aquesta sala és buida.',
+    body: "La pàgina que busques no existeix o s'ha mogut. Ni amb el llum encès no hi ha res a trobar aquí.",
+    home: "Torna a l'inici",
+    hintPointer: 'Mou el cursor per il·luminar la sala',
+    hintTouch: 'Toca la pantalla per il·luminar la sala',
+  },
 };

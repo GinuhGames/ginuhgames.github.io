@@ -41,10 +41,16 @@ const store = (locale: Locale) => {
   }
 };
 
-/** /es and /ca are explicit. On the root, a saved choice wins, then the browser language. */
+/**
+ * /es and /ca are explicit (so is /es/anything on the 404 page). Elsewhere a saved
+ * choice wins, then the browser language.
+ */
 function detectLocale(): Locale {
   const pathname = window.location.pathname;
-  if (pathname !== '/') return fromPath(pathname) ?? 'en';
+  if (pathname !== '/') {
+    const explicit = fromPath(pathname);
+    if (explicit) return explicit;
+  }
   const stored = readStored();
   if (stored) return stored;
   for (const language of navigator.languages ?? [navigator.language]) {
@@ -67,7 +73,11 @@ type I18nValue = {
 
 const I18nContext = createContext<I18nValue | null>(null);
 
-export function I18nProvider({ children }: { children: ReactNode }) {
+/**
+ * `syncUrl` is off on the 404 page: its address must stay as the visitor typed it,
+ * so switching language there only swaps the copy.
+ */
+export function I18nProvider({ children, syncUrl = true }: { children: ReactNode; syncUrl?: boolean }) {
   const [locale, setLocaleState] = useState<Locale>(detectLocale);
   const localeRef = useRef(locale);
 
@@ -76,10 +86,11 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     const t = dictionaries[locale];
     const path = pathFor(locale);
     localeRef.current = locale;
+    document.documentElement.lang = locale;
+    if (!syncUrl) return;
     if (window.location.pathname !== path) {
       history.replaceState(history.state, '', path + window.location.hash);
     }
-    document.documentElement.lang = locale;
     document.title = t.meta.title;
     setMeta('meta[name="description"]', 'content', t.meta.description);
     setMeta('meta[property="og:title"]', 'content', t.meta.title);
@@ -87,20 +98,24 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     setMeta('meta[property="og:url"]', 'content', SITE + path);
     setMeta('meta[property="og:locale"]', 'content', { en: 'en_GB', es: 'es_ES', ca: 'ca_ES' }[locale]);
     setMeta('link[rel="canonical"]', 'href', SITE + path);
-  }, [locale]);
+  }, [locale, syncUrl]);
 
   useEffect(() => {
+    if (!syncUrl) return;
     const onPop = () => setLocaleState(fromPath(window.location.pathname) ?? 'en');
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
-  }, []);
+  }, [syncUrl]);
 
-  const setLocale = useCallback((next: Locale) => {
-    store(next);
-    if (localeRef.current === next) return;
-    history.pushState(null, '', pathFor(next) + window.location.hash);
-    setLocaleState(next);
-  }, []);
+  const setLocale = useCallback(
+    (next: Locale) => {
+      store(next);
+      if (localeRef.current === next) return;
+      if (syncUrl) history.pushState(null, '', pathFor(next) + window.location.hash);
+      setLocaleState(next);
+    },
+    [syncUrl]
+  );
 
   const value = useMemo(() => ({ locale, t: dictionaries[locale], setLocale }), [locale, setLocale]);
 

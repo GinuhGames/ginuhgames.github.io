@@ -1,0 +1,145 @@
+.nf {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--black);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.nf__bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: var(--nav-h);
+}
+
+.nf__brand {
+  display: block;
+  border-radius: 4px;
+}
+
+.nf__brand img {
+  width: auto;
+  height: 34px;
+}
+
+/* The dark room: the same number twice, one dim and one revealed by the light */
+.nf__stage {
+  --lx: 50%;
+  --ly: 42%;
+  --lr: 0.5px;
+
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Both layers fill the stage, so the light's coordinates match the page. */
+.nf__digits {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding-bottom: 14vh;
+  font-size: clamp(9rem, 34vw, 30rem);
+  font-weight: 800;
+  font-stretch: 112%;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.nf__digits--dark {
+  color: #1c1d21;
+}
+
+.nf__digits--lit {
+  color: var(--paper);
+  -webkit-mask-image: radial-gradient(
+    circle var(--lr) at var(--lx) var(--ly),
+    #000 0%,
+    rgb(0 0 0 / 0.9) 30%,
+    rgb(0 0 0 / 0.4) 62%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--lr) at var(--lx) var(--ly),
+    #000 0%,
+    rgb(0 0 0 / 0.9) 30%,
+    rgb(0 0 0 / 0.4) 62%,
+    transparent 100%
+  );
+}
+
+.nf__glow {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    circle calc(var(--lr) * 1.25) at var(--lx) var(--ly),
+    rgb(255 196 150 / 0.16) 0%,
+    rgb(251 91 33 / 0.08) 45%,
+    transparent 75%
+  );
+}
+
+.nf__copy {
+  position: relative;
+  z-index: 1;
+  align-self: end;
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+  padding-bottom: clamp(32px, 7vh, 72px);
+}
+
+.nf__title {
+  font-size: var(--step-4);
+  font-weight: 800;
+  font-stretch: 106%;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.nf__body {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--grey);
+  max-width: 34em;
+}
+
+.nf__copy .actions {
+  margin-top: 8px;
+}
+
+.nf__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  color: var(--orange);
+  font-size: 0.8125rem;
+}
+
+.nf__hint svg {
+  flex: none;
+  font-size: 16px;
+}
+
+@media (max-width: 640px) {
+  .nf__brand img {
+    height: 30px;
+  }
+  .nf__digits {
+    font-stretch: 100%;
+    /* Lift the number above the copy, which takes the lower half on phones. */
+    padding-bottom: 52svh;
+  }
+}
