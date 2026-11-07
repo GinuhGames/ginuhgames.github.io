@@ -40,7 +40,7 @@ export function Memo() {
               revealDirection="start"
               speed={14}
               characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=/<>"
-              scrambleColor="#fb5b21"
+              scrambleColor="#e67347"
             />
           </p>
           <div className="actions">

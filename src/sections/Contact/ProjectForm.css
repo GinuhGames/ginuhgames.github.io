@@ -67,7 +67,7 @@
 .pform textarea:focus-visible {
   outline: none;
   border-color: var(--orange);
-  box-shadow: 0 0 0 3px rgb(251 91 33 / 0.25);
+  box-shadow: 0 0 0 3px rgb(230 115 71 / 0.25);
 }
 
 .pform [aria-invalid='true'] {
@@ -219,4 +219,64 @@
     width: 100%;
     justify-content: center;
   }
+}
+
+/* Spam trap: kept out of sight and out of the tab order */
+.pform__trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.pform {
+  position: relative;
+}
+
+.pform__submit .btn:disabled {
+  cursor: progress;
+  opacity: 0.85;
+  transform: none;
+}
+
+.pform__spin {
+  animation: pform-spin 700ms linear infinite;
+}
+
+@keyframes pform-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pform__spin {
+    animation-duration: 1.6s;
+  }
+}
+
+.pform__alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid rgb(255 154 122 / 0.4);
+  background: rgb(255 154 122 / 0.08);
+  color: var(--paper);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.pform__alert svg {
+  flex: none;
+  margin-top: 2px;
+  font-size: 18px;
+  color: #ff9a7a;
+}
+
+.pform__alert .text-link {
+  color: var(--paper);
+  background-size: 100% 1px;
 }

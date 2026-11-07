@@ -99,7 +99,7 @@
   background: radial-gradient(
     circle calc(var(--lr) * 1.15) at var(--lx) var(--ly),
     rgb(255 196 150 / 0.2) 0%,
-    rgb(251 91 33 / 0.08) 45%,
+    rgb(230 115 71 / 0.08) 45%,
     transparent 75%
   );
 }

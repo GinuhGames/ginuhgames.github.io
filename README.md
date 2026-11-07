@@ -36,13 +36,26 @@ La web está en inglés (`/`), castellano (`/es`) y catalán (`/ca`). `en.ts` es
 
 ## Formulario de proyectos
 
-La web es estática, así que el formulario de la sección de contacto valida los datos y abre la aplicación de correo del visitante con la solicitud ya redactada y dirigida a `ginuhgames@gmail.com`. Si en el futuro queréis recibir las solicitudes sin pasar por el correo del visitante, basta con cambiar la función `submit` de `src/sections/Contact/ProjectForm.tsx` para enviar los datos a un servicio de formularios o a una función de Vercel.
+El formulario de Contacto envía las solicitudes a `/api/contact` ([api/contact.ts](api/contact.ts)), una función de Vercel que valida los datos y manda el correo con [Resend](https://resend.com). El correo llega con el visitante como *reply-to*, así que se le contesta directamente desde Gmail. Si el envío falla, el formulario ofrece abrir la misma solicitud en el correo del visitante.
+
+**Configuración (una sola vez):**
+
+1. Crea una cuenta gratuita en [resend.com](https://resend.com) **con `ginuhgames@gmail.com`**. Sin verificar un dominio, Resend solo entrega a la dirección de la cuenta.
+2. En Resend → *API Keys* → *Create API Key* (permiso *Sending access*).
+3. En Vercel → proyecto → *Settings → Environment Variables*, añade `RESEND_API_KEY` con esa clave para *Production* y *Preview*.
+4. Vuelve a desplegar (las variables se aplican en el siguiente despliegue).
+
+Variables opcionales: `CONTACT_TO` (buzón que recibe, por defecto `ginuhgames@gmail.com`) y `CONTACT_FROM` (remitente; por ejemplo `Ginuh Games <web@ginuhgames.com>` cuando verifiquéis `ginuhgames.com` en Resend).
+
+**Protección:** solo acepta peticiones desde ginuhgames.com y sus despliegues de Vercel, descarta bots (campo trampa invisible y envíos en menos de 2,5 s) y limita la longitud de cada campo.
+
+**En local:** `npm run dev` también sirve `/api/contact`. Sin `RESEND_API_KEY` no envía nada: valida la solicitud y la muestra en la consola.
 
 ## Paleta de marca
 
 | Token | Color |
 | --- | --- |
-| `--orange` | `#FB5B21` |
+| `--orange` | `#E67347` |
 | `--charcoal` | `#222429` |
 | `--black` | `#111111` |
 | `--grey` | `#BDBDBF` |

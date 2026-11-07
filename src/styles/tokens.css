@@ -1,12 +1,13 @@
 /*
  * Ginuh Games design tokens.
- * Brand palette (kept from the original site): orange #FB5B21, charcoal #222429,
- * black #111111, grey #BDBDBF, paper #F4F5F8. Everything else is derived from it.
+ * Brand palette: orange #E67347 (the studio's brand orange), plus charcoal #222429,
+ * black #111111, grey #BDBDBF and paper #F4F5F8 from the original site.
+ * Everything else is derived from it.
  */
 :root {
   /* Brand palette */
-  --orange: #fb5b21;
-  --orange-bright: #ff7643;
+  --orange: #e67347;
+  --orange-bright: #ec845f;
   --charcoal: #222429;
   --black: #111111;
   --grey: #bdbdbf;
@@ -67,7 +68,7 @@
 /* The one brand band */
 .theme-orange {
   --bg: var(--orange);
-  --surface: #ec4f16;
+  --surface: #da6a3f;
   --text: var(--black);
   --text-muted: rgb(17 17 17 / 0.82);
   --text-subtle: rgb(17 17 17 / 0.82);

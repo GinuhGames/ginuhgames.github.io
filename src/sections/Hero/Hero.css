@@ -131,7 +131,7 @@
   height: 6px;
   border-radius: 50%;
   background: currentColor;
-  box-shadow: 0 0 0 3px rgb(251 91 33 / 0.2);
+  box-shadow: 0 0 0 3px rgb(230 115 71 / 0.2);
 }
 
 .hero__feature-name {

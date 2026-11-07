@@ -94,7 +94,9 @@ ol[role='list'] {
   border-radius: 4px;
 }
 
-.theme-orange :focus-visible {
+/* The orange outline is too faint on light and orange grounds (under 3:1). */
+.theme-orange :focus-visible,
+.theme-paper :focus-visible {
   outline-color: var(--black);
 }
 

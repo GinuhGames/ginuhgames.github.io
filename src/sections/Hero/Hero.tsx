@@ -52,7 +52,7 @@ export function Hero() {
       <div className="hero__rays" aria-hidden="true">
         <LightRays
           raysOrigin="top-center"
-          raysColor="#ff7a45"
+          raysColor="#f2875c"
           raysSpeed={0.6}
           lightSpread={0.85}
           rayLength={1.5}
