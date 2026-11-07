@@ -183,12 +183,13 @@ export function ProjectForm() {
         <input {...field('company')} type="text" autoComplete="organization" maxLength={160} />
       </div>
 
-      {/* Spam trap: invisible to people, irresistible to bots. */}
+      {/* Spam trap: invisible to people, irresistible to bots. Its name avoids
+          anything browsers autofill (url, website, address), so real people never trip it. */}
       <div className="pform__trap" aria-hidden="true">
-        <label htmlFor={`${uid}-website`}>Website</label>
+        <label htmlFor={`${uid}-extra`}>Leave this field empty</label>
         <input
-          id={`${uid}-website`}
-          name="website"
+          id={`${uid}-extra`}
+          name="ginuh_extra"
           type="text"
           tabIndex={-1}
           autoComplete="off"
