@@ -1,0 +1,84 @@
+.memo {
+  background: var(--black);
+  padding-top: 0;
+}
+
+.memo__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+}
+
+.memo__media {
+  position: relative;
+  aspect-ratio: 479 / 499;
+  max-width: 480px;
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.memo__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memo__doc {
+  display: grid;
+  gap: 28px;
+}
+
+.memo__letterhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--line-strong);
+  color: var(--text-subtle);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.memo__stamp {
+  color: var(--orange);
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+.memo__title {
+  font-size: var(--step-4);
+  font-weight: 800;
+  font-stretch: 104%;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  max-width: 14ch;
+}
+
+.memo__text {
+  font-family: var(--font-mono);
+  font-size: var(--step-1);
+  line-height: 1.65;
+  color: var(--grey);
+  max-width: 46ch;
+}
+
+@media (max-width: 960px) {
+  .memo__grid {
+    grid-template-columns: 1fr;
+  }
+  .memo__media {
+    max-width: 360px;
+  }
+}
+
+/* On phones the lit crystal above already carries this picture. */
+@media (max-width: 640px) {
+  .memo__media {
+    display: none;
+  }
+}

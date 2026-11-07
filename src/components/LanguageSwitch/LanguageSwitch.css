@@ -1,0 +1,41 @@
+.lang ul {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid rgb(244 245 248 / 0.12);
+}
+
+.lang a {
+  display: grid;
+  place-items: center;
+  min-width: 36px;
+  height: 32px;
+  padding-inline: 6px;
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--grey);
+  transition:
+    color 200ms ease,
+    background-color 200ms ease,
+    transform var(--press) var(--ease-out);
+}
+
+.lang a:active {
+  transform: scale(0.94);
+}
+
+.lang a[aria-current] {
+  background: var(--paper);
+  color: var(--black);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lang a:not([aria-current]):hover {
+    color: var(--paper);
+    background: rgb(244 245 248 / 0.08);
+  }
+}

@@ -1,0 +1,222 @@
+.pform,
+.pform__sent {
+  display: grid;
+  gap: 22px;
+}
+
+.pform__title {
+  font-size: var(--step-3);
+  font-weight: 800;
+  font-stretch: 104%;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.pform__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 16px;
+}
+
+.pform__field {
+  display: grid;
+  gap: 8px;
+}
+
+.pform label,
+.pform legend {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--grey);
+}
+
+.pform__optional {
+  color: var(--text-subtle);
+  font-weight: 400;
+}
+
+.pform input[type='text'],
+.pform input[type='email'],
+.pform textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 10px;
+  border: 1px solid rgb(244 245 248 / 0.14);
+  background: var(--charcoal);
+  color: var(--paper);
+  font-size: 1rem;
+  line-height: 1.4;
+  caret-color: var(--orange);
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    background-color 200ms ease;
+}
+
+.pform textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.pform input:hover,
+.pform textarea:hover {
+  border-color: rgb(244 245 248 / 0.26);
+}
+
+.pform input:focus-visible,
+.pform textarea:focus-visible {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgb(251 91 33 / 0.25);
+}
+
+.pform [aria-invalid='true'] {
+  border-color: #ff8a65;
+}
+
+.pform__error {
+  color: #ff9a7a;
+  font-size: 0.875rem;
+}
+
+/* Project type chips */
+.pform__types {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.pform__types legend {
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.pform__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  position: relative;
+  cursor: pointer;
+}
+
+.chip input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.chip span {
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  padding-inline: 14px;
+  border-radius: 999px;
+  border: 1px solid rgb(244 245 248 / 0.16);
+  color: var(--grey);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform var(--press) var(--ease-out);
+}
+
+.chip:active span {
+  transform: scale(0.96);
+}
+
+.chip input:checked + span {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--black);
+}
+
+.chip input:focus-visible + span {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip:hover input:not(:checked) + span {
+    border-color: rgb(244 245 248 / 0.34);
+    color: var(--paper);
+  }
+}
+
+.pform__submit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  padding-top: 4px;
+}
+
+.pform__submit .btn {
+  cursor: pointer;
+}
+
+.pform__note {
+  flex: 1 1 220px;
+  font-size: 0.8125rem;
+  color: var(--text-subtle);
+}
+
+/* After sending */
+.pform__sent {
+  justify-items: start;
+  align-content: center;
+  min-height: 420px;
+  color: var(--grey);
+}
+
+.pform__sent:focus {
+  outline: none;
+}
+
+.pform__sent .pform__title {
+  color: var(--paper);
+}
+
+.pform__sent .text-link {
+  color: var(--paper);
+  background-size: 100% 1px;
+}
+
+.pform__sent-icon {
+  font-size: 40px;
+  color: var(--orange);
+}
+
+.pform__again {
+  height: 44px;
+  padding-inline: 16px;
+  border-radius: var(--radius-s);
+  border: 1px solid rgb(244 245 248 / 0.2);
+  color: var(--paper);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition:
+    transform var(--press) var(--ease-out),
+    border-color 200ms ease;
+}
+
+.pform__again:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 520px) {
+  .pform__row {
+    grid-template-columns: 1fr;
+  }
+  .pform__submit .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

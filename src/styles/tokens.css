@@ -1,0 +1,77 @@
+/*
+ * Ginuh Games design tokens.
+ * Brand palette (kept from the original site): orange #FB5B21, charcoal #222429,
+ * black #111111, grey #BDBDBF, paper #F4F5F8. Everything else is derived from it.
+ */
+:root {
+  /* Brand palette */
+  --orange: #fb5b21;
+  --orange-bright: #ff7643;
+  --charcoal: #222429;
+  --black: #111111;
+  --grey: #bdbdbf;
+  --paper: #f4f5f8;
+
+  /* Roles — dark ground is the default world (Unlighted lives in the dark) */
+  --bg: var(--black);
+  --surface: var(--charcoal);
+  --text: var(--paper);
+  --text-muted: var(--grey);
+  --text-subtle: #8d8e93;
+  --line: rgb(244 245 248 / 0.12);
+  --line-strong: rgb(244 245 248 / 0.24);
+  --accent: var(--orange);
+
+  /* Type */
+  --font-sans: 'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --step--1: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --step-1: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --step-2: clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem);
+  --step-3: clamp(1.875rem, 1.5rem + 1.7vw, 2.875rem);
+  --step-4: clamp(2.375rem, 1.7rem + 3vw, 4.25rem);
+  --step-5: clamp(2.75rem, 1.6rem + 5vw, 6rem);
+  --step-hero: clamp(4.75rem, 1.2rem + 11vw, 11rem);
+
+  /* Space */
+  --gutter: clamp(1rem, 0.55rem + 2.2vw, 2.5rem);
+  --wrap: 1360px;
+  --section-y: clamp(5.5rem, 3rem + 8vw, 10rem);
+  --nav-h: 72px;
+
+  /* Shape */
+  --radius-s: 6px;
+  --radius-m: 14px;
+  --radius-l: 20px;
+
+  /* Motion (Emil Kowalski curves) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --press: 160ms;
+}
+
+/* Daylight ground for the people behind the games */
+.theme-paper {
+  --bg: var(--paper);
+  --surface: #e8e9ed;
+  --text: var(--black);
+  --text-muted: #45474d;
+  --text-subtle: #66686e;
+  --line: rgb(17 17 17 / 0.12);
+  --line-strong: rgb(17 17 17 / 0.28);
+}
+
+/* The one brand band */
+.theme-orange {
+  --bg: var(--orange);
+  --surface: #ec4f16;
+  --text: var(--black);
+  --text-muted: rgb(17 17 17 / 0.82);
+  --text-subtle: rgb(17 17 17 / 0.82);
+  --line: rgb(17 17 17 / 0.2);
+  --line-strong: rgb(17 17 17 / 0.4);
+  --accent: var(--black);
+}

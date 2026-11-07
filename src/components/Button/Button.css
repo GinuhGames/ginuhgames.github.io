@@ -1,0 +1,95 @@
+.btn {
+  --btn-bg: var(--orange);
+  --btn-bg-hover: var(--orange-bright);
+  --btn-fg: var(--black);
+  --btn-border: transparent;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  height: 52px;
+  padding-inline: 22px 18px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform var(--press) var(--ease-out),
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.btn--sm {
+  height: 42px;
+  padding-inline: 16px 13px;
+  font-size: 0.875rem;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn__icon {
+  display: inline-flex;
+  font-size: 1.15em;
+}
+
+.btn__trail {
+  font-size: 1.1em;
+  flex: none;
+  transition: transform 200ms var(--ease-out);
+}
+
+.btn--secondary {
+  --btn-bg: transparent;
+  --btn-bg-hover: rgb(244 245 248 / 0.06);
+  --btn-fg: var(--text);
+  --btn-border: var(--line-strong);
+}
+
+.theme-paper .btn--secondary {
+  --btn-bg-hover: rgb(17 17 17 / 0.05);
+}
+
+.btn--dark {
+  --btn-bg: var(--black);
+  --btn-bg-hover: var(--charcoal);
+  --btn-fg: var(--paper);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    background: var(--btn-bg-hover);
+  }
+  .btn--secondary:hover {
+    border-color: var(--text-subtle);
+  }
+  .btn:hover .btn__trail {
+    transform: translateX(2px);
+  }
+  .btn[target='_blank']:hover .btn__trail {
+    transform: translate(2px, -2px);
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 520px) {
+  .actions .btn--md {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}

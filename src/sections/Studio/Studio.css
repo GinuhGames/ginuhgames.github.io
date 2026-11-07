@@ -1,0 +1,80 @@
+.studio__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(48px, 7vw, 112px);
+  align-items: start;
+}
+
+.studio__copy {
+  display: grid;
+  gap: clamp(32px, 4vw, 48px);
+}
+
+.studio__title {
+  font-size: var(--step-5);
+  font-weight: 800;
+  font-stretch: 106%;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  max-width: 13ch;
+}
+
+.studio__prose {
+  font-size: var(--step-1);
+  line-height: 1.55;
+  max-width: 40ch;
+}
+
+/* The name card — a dark tile that carries the fox mark */
+.studio__name {
+  position: relative;
+  display: grid;
+  gap: 28px;
+  padding: clamp(28px, 3.5vw, 44px);
+  border-radius: var(--radius-l);
+  background: var(--black);
+  color: var(--paper);
+  overflow: hidden;
+  box-shadow: 0 30px 60px -30px rgb(17 17 17 / 0.45);
+}
+
+.studio__fox {
+  width: clamp(96px, 10vw, 136px);
+  height: auto;
+}
+
+.studio__word {
+  display: grid;
+  gap: 10px;
+}
+
+.studio__guineu {
+  font-size: var(--step-4);
+  font-weight: 800;
+  font-stretch: 110%;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.studio__define {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  color: var(--orange);
+}
+
+.studio__define span + span {
+  color: var(--grey);
+}
+
+.studio__story {
+  color: var(--grey);
+  padding-top: 24px;
+  border-top: 1px solid rgb(244 245 248 / 0.12);
+}
+
+@media (max-width: 960px) {
+  .studio__grid {
+    grid-template-columns: 1fr;
+  }
+}

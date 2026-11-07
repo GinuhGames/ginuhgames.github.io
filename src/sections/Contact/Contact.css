@@ -1,0 +1,223 @@
+.contact ::selection {
+  background: var(--black);
+  color: var(--orange);
+}
+
+.contact__head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: end;
+  gap: 24px 64px;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.contact__title {
+  font-size: var(--step-5);
+  font-weight: 800;
+  font-stretch: 106%;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.contact__intro {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--text-muted);
+  max-width: 30em;
+}
+
+.contact__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+
+/* The request form sits on a dark card: it restores the dark-ground tokens. */
+.contact__card {
+  --bg: var(--black);
+  --text: var(--paper);
+  --text-muted: var(--grey);
+  --text-subtle: #8d8e93;
+  --line: rgb(244 245 248 / 0.12);
+  --line-strong: rgb(244 245 248 / 0.24);
+
+  scroll-margin-top: 96px;
+  padding: clamp(24px, 3.4vw, 44px);
+  border-radius: var(--radius-l);
+  background: var(--black);
+  color: var(--paper);
+  box-shadow: 0 40px 80px -40px rgb(17 17 17 / 0.6);
+}
+
+.contact__card ::selection {
+  background: var(--orange);
+  color: var(--black);
+}
+
+.contact__card :focus-visible {
+  outline-color: var(--orange);
+}
+
+.contact__aside {
+  display: grid;
+  gap: 36px;
+}
+
+.contact__block {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+  color: var(--text-muted);
+}
+
+.contact__block + .contact__block {
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.contact__label {
+  color: var(--black);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.contact__address {
+  font-size: clamp(1.375rem, 1rem + 1.2vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--black);
+  overflow-wrap: anywhere;
+  background-image: linear-gradient(var(--black), var(--black));
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 3px;
+  transition: background-size 400ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact__address:hover {
+    background-size: 100% 2px;
+  }
+}
+
+.contact__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding-inline: 12px 14px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line-strong);
+  color: var(--black);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition:
+    transform var(--press) var(--ease-out),
+    background-color 200ms ease;
+}
+
+.contact__copy:active {
+  transform: scale(0.96);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact__copy:hover {
+    background: rgb(17 17 17 / 0.08);
+  }
+}
+
+/* Icon swap: copy → check, crossfaded with a touch of blur so it reads as one morph */
+.contact__copy-icon {
+  display: grid;
+  width: 16px;
+  height: 16px;
+}
+
+.contact__copy-icon svg {
+  grid-area: 1 / 1;
+  width: 16px;
+  height: 16px;
+  transition:
+    opacity 200ms ease,
+    transform 200ms var(--ease-out),
+    filter 200ms ease;
+}
+
+.contact__copy-icon svg:last-child,
+.contact__copy[data-copied] .contact__copy-icon svg:first-child {
+  opacity: 0;
+  transform: scale(0.6);
+  filter: blur(2px);
+}
+
+.contact__copy[data-copied] .contact__copy-icon svg:last-child {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.contact__details {
+  display: grid;
+  gap: 12px;
+}
+
+.contact__details li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--black);
+  font-weight: 500;
+}
+
+.contact__details svg {
+  flex: none;
+}
+
+.contact__socials {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 24px;
+  width: 100%;
+}
+
+.contact__socials a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 8px;
+  color: var(--black);
+  font-weight: 500;
+}
+
+.contact__social-icon {
+  flex: none;
+  font-size: 16px;
+}
+
+.contact__social-arrow {
+  margin-left: auto;
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition:
+    opacity 200ms ease,
+    transform 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact__socials a:hover .contact__social-arrow {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .contact__head,
+  .contact__layout {
+    grid-template-columns: 1fr;
+  }
+}
