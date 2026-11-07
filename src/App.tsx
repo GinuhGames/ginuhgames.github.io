@@ -5,8 +5,6 @@ import { I18nProvider, useI18n } from './i18n/I18nProvider';
 import { Nav } from './components/Nav/Nav';
 import { Hero } from './sections/Hero/Hero';
 import { Unlighted } from './sections/Unlighted/Unlighted';
-import { Light } from './sections/Light/Light';
-import { Memo } from './sections/Memo/Memo';
 import { Studio } from './sections/Studio/Studio';
 import { Team } from './sections/Team/Team';
 import { Services } from './sections/Services/Services';
@@ -31,8 +29,6 @@ function Page() {
       <main>
         <Hero />
         <Unlighted />
-        <Light />
-        <Memo />
         <Studio />
         <Team />
         <Services />

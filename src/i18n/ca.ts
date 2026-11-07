@@ -21,7 +21,6 @@ export const ca: Dictionary = {
       services: 'Serveis',
       contact: 'Contacte',
     },
-    cta: 'Aconsegueix Unlighted',
     home: 'Ginuh Games, torna a dalt',
     main: 'Principal',
     mobile: 'Mòbil',
@@ -31,8 +30,6 @@ export const ca: Dictionary = {
   },
   hero: {
     lead: 'Un estudi independent de videojocs de Barcelona. Creem els nostres propis jocs i desenvolupem jocs, microjocs i experiències interactives a mida.',
-    status: 'Ja disponible a Steam',
-    opensSteam: "(obre Steam en una pestanya nova)",
   },
   game: {
     summary:
@@ -44,7 +41,8 @@ export const ca: Dictionary = {
       { term: 'Idiomes', detail: 'Anglès, castellà, català' },
     ],
     soundtrack: 'Escolta la banda sonora a Spotify',
-    artLink: "Unlighted a Steam (s'obre en una pestanya nova)",
+    hintPointer: 'Mou el cursor per la imatge per il·luminar-la',
+    hintTouch: "Desplaça't o toca la imatge per il·luminar-la",
     artAlt:
       "Art principal d'Unlighted: un escriptori il·luminat per un llum, ple d'informes de recerca d'Umbral Alchemy, al costat d'un cristall fosc.",
     awardsLabel: 'Reconeixements',
@@ -53,19 +51,6 @@ export const ca: Dictionary = {
       { result: 'Finalista', title: 'Premi del Públic al Millor Joc Català', event: 'SAGA Awards 2025' },
       { result: 'Finançat', title: 'Gràcies a la nostra comunitat', event: 'Kickstarter' },
     ],
-  },
-  light: {
-    title: 'Només la llum ho fa real.',
-    body: "Fes servir la llum i tots els dispositius que Umbral Alchemy posa a la teva disposició per superar les proves i descobrir la veritat. Escaneja la Umbralita per localitzar-la i il·lumina-la perquè es materialitzi.",
-    hintPointer: 'Mou el cursor per la sala per il·luminar-la',
-    hintTouch: "Desplaça't o toca la sala per il·luminar-la",
-    alt: "Vista del joc de la sala de proves d'Umbral Alchemy: un cristall d'Umbralita sobre un pedestal entre dos focus.",
-  },
-  memo: {
-    title: 'Seràs el subjecte de proves definitiu?',
-    text: 'Si decideixes emprendre aquest llarg i dur viatge amb nosaltres, descobriràs un gran secret amagat a la humanitat. Tot el que vegis aquí és totalment confidencial, així que et demanem la màxima discreció. Si és que aconsegueixes sortir, és clar.',
-    confidential: 'Confidencial',
-    alt: "Un cristall violeta fosc d'Umbralita en un passadís de les instal·lacions d'Umbral Alchemy.",
   },
   studio: {
     title: 'Un petit estudi on la imaginació es converteix en joc.',

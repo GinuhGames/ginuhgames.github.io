@@ -2,7 +2,7 @@
 
 Web oficial de [Ginuh Games](https://www.ginuhgames.com), estudio independiente de videojuegos de Barcelona.
 
-Construida con **React 19 + Vite + TypeScript**, scroll suave con **Lenis**, animaciones con **GSAP** (ScrollTrigger, SplitText) y componentes de **React Bits** (LightRays, SplitText, DecryptedText).
+Construida con **React 19 + Vite + TypeScript**, scroll suave con **Lenis**, animaciones con **GSAP** (ScrollTrigger, SplitText) y componentes de **React Bits** (LightRays, SplitText).
 
 ## Desarrollo
 

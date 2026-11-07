@@ -203,9 +203,6 @@
 }
 
 @media (max-width: 640px) {
-  .nav__cta {
-    display: none;
-  }
   .nav__brand img {
     height: 30px;
   }

@@ -21,7 +21,6 @@ export const es: Dictionary = {
       services: 'Servicios',
       contact: 'Contacto',
     },
-    cta: 'Consigue Unlighted',
     home: 'Ginuh Games, volver arriba',
     main: 'Principal',
     mobile: 'Móvil',
@@ -31,8 +30,6 @@ export const es: Dictionary = {
   },
   hero: {
     lead: 'Un estudio independiente de videojuegos de Barcelona. Creamos nuestros propios juegos y desarrollamos juegos, microjuegos y experiencias interactivas a medida.',
-    status: 'Ya disponible en Steam',
-    opensSteam: '(abre Steam en una pestaña nueva)',
   },
   game: {
     summary:
@@ -44,7 +41,8 @@ export const es: Dictionary = {
       { term: 'Idiomas', detail: 'Inglés, castellano, catalán' },
     ],
     soundtrack: 'Escucha la banda sonora en Spotify',
-    artLink: 'Unlighted en Steam (se abre en una pestaña nueva)',
+    hintPointer: 'Mueve el cursor por la imagen para iluminarla',
+    hintTouch: 'Desplázate o toca la imagen para iluminarla',
     artAlt:
       'Arte principal de Unlighted: un escritorio iluminado por una lámpara, lleno de informes de investigación de Umbral Alchemy, junto a un cristal oscuro.',
     awardsLabel: 'Reconocimientos',
@@ -53,19 +51,6 @@ export const es: Dictionary = {
       { result: 'Finalista', title: 'Premio del Público al Mejor Juego Catalán', event: 'SAGA Awards 2025' },
       { result: 'Financiado', title: 'Gracias a nuestra comunidad', event: 'Kickstarter' },
     ],
-  },
-  light: {
-    title: 'Solo la luz lo hace real.',
-    body: 'Usa la luz y todos los dispositivos que Umbral Alchemy pone a tu disposición para superar las pruebas y descubrir la verdad. Escanea la Umbralita para localizarla e ilumínala para que se materialice.',
-    hintPointer: 'Mueve el cursor por la sala para iluminarla',
-    hintTouch: 'Desplázate o toca la sala para iluminarla',
-    alt: 'Vista del juego de la sala de pruebas de Umbral Alchemy: un cristal de Umbralita sobre un pedestal entre dos focos.',
-  },
-  memo: {
-    title: '¿Serás el sujeto de pruebas definitivo?',
-    text: 'Si decides emprender este largo y duro viaje con nosotros, descubrirás un gran secreto oculto a la humanidad. Todo lo que veas aquí es totalmente confidencial, así que te pedimos la máxima discreción. Si es que consigues salir, claro.',
-    confidential: 'Confidencial',
-    alt: 'Un cristal violeta oscuro de Umbralita en un pasillo de las instalaciones de Umbral Alchemy.',
   },
   studio: {
     title: 'Un pequeño estudio donde la imaginación se convierte en juego.',

@@ -20,7 +20,6 @@ export const en = {
       services: 'Services',
       contact: 'Contact',
     },
-    cta: 'Get Unlighted',
     home: 'Ginuh Games, back to top',
     main: 'Main',
     mobile: 'Mobile',
@@ -30,8 +29,6 @@ export const en = {
   },
   hero: {
     lead: 'An independent video game studio from Barcelona. We make our own games, and custom games, microgames and interactive experiences on demand.',
-    status: 'Out now on Steam',
-    opensSteam: '(opens Steam in a new tab)',
   },
   game: {
     summary:
@@ -43,7 +40,8 @@ export const en = {
       { term: 'Languages', detail: 'English, Spanish, Catalan' },
     ],
     soundtrack: 'Listen to the soundtrack on Spotify',
-    artLink: 'Unlighted on Steam (opens in a new tab)',
+    hintPointer: 'Move your cursor over the image to light it',
+    hintTouch: 'Scroll or touch the image to light it',
     artAlt:
       'Unlighted key art: a desk lit by a lamp, covered in Umbral Alchemy research files, next to a dark crystal.',
     awardsLabel: 'Recognition',
@@ -52,19 +50,6 @@ export const en = {
       { result: 'Finalist', title: 'Audience Award for Best Catalan Game', event: 'SAGA Awards 2025' },
       { result: 'Funded', title: 'Backed by our community', event: 'Kickstarter' },
     ],
-  },
-  light: {
-    title: 'Only light makes it real.',
-    body: 'Use the light and every device Umbral Alchemy puts at your disposal to pass the tests and learn the truth. Scan the Umbralita to find it, then light it up to make it materialize.',
-    hintPointer: 'Move your cursor over the room to light it',
-    hintTouch: 'Scroll or touch the room to light it',
-    alt: 'In-game view of the Umbral Alchemy test hall: an Umbralita crystal on a pedestal between two spotlights.',
-  },
-  memo: {
-    title: 'Will you be the ultimate test subject?',
-    text: 'If you decide to undertake this long and hard trip with us, you will discover a great secret hidden from humanity. Everything you see here is totally confidential, so we ask for complete discretion. If you manage to get out, of course.',
-    confidential: 'Confidential',
-    alt: 'A dark violet Umbralita crystal standing in a corridor of the Umbral Alchemy facility.',
   },
   studio: {
     title: 'A little studio where imagination becomes play.',

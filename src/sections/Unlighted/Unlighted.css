@@ -62,34 +62,89 @@
   color: var(--paper);
 }
 
+.unlighted__media {
+  display: grid;
+  gap: 16px;
+}
+
+/* The dark key art: the pointer is the light that reveals it. */
 .unlighted__art {
+  --lx: 14%;
+  --ly: 24%;
+  --lr: 0.5px;
+
   position: relative;
-  display: block;
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-m);
   overflow: hidden;
-  background: #000;
+  background: #050506;
   box-shadow:
     0 40px 80px -30px rgb(0 0 0 / 0.8),
     0 0 0 1px var(--line);
-  transition: transform var(--press) var(--ease-out);
+  cursor: crosshair;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  isolation: isolate;
 }
 
-.unlighted__art img {
+.unlighted__layer {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 900ms var(--ease-out);
+  pointer-events: none;
+  -webkit-user-drag: none;
 }
 
-.unlighted__art:active {
-  transform: scale(0.99);
+.unlighted__layer--dark {
+  filter: brightness(0.14) saturate(0.35) contrast(1.1);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .unlighted__art:hover img {
-    transform: scale(1.03);
-  }
+.unlighted__layer--lit {
+  -webkit-mask-image: radial-gradient(
+    circle var(--lr) at var(--lx) var(--ly),
+    #000 0%,
+    rgb(0 0 0 / 0.92) 32%,
+    rgb(0 0 0 / 0.45) 62%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--lr) at var(--lx) var(--ly),
+    #000 0%,
+    rgb(0 0 0 / 0.92) 32%,
+    rgb(0 0 0 / 0.45) 62%,
+    transparent 100%
+  );
+  filter: brightness(1.3) saturate(1.1);
+}
+
+/* Warm bloom of the torch over the lit area */
+.unlighted__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    circle calc(var(--lr) * 1.15) at var(--lx) var(--ly),
+    rgb(255 196 150 / 0.2) 0%,
+    rgb(230 115 71 / 0.08) 45%,
+    transparent 75%
+  );
+}
+
+.unlighted__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--orange);
+  font-size: 0.8125rem;
+}
+
+.unlighted__hint svg {
+  font-size: 16px;
+  flex: none;
 }
 
 /* Recognition */
@@ -135,7 +190,7 @@
   .unlighted__grid {
     grid-template-columns: 1fr;
   }
-  .unlighted__art {
+  .unlighted__media {
     order: -1;
   }
   .awards {

@@ -97,9 +97,6 @@ export function Nav() {
 
         <div className="nav__end">
           <LanguageSwitch />
-          <Button href={links.steam} size="sm" icon={<FaSteam />} className="nav__cta">
-            {t.nav.cta}
-          </Button>
           <button
             ref={toggleRef}
             type="button"

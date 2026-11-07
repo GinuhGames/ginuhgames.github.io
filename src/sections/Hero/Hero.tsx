@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { FaSteam } from 'react-icons/fa6';
-import { LuArrowUpRight } from 'react-icons/lu';
 import LightRays from '../../components/reactbits/LightRays/LightRays';
 import SplitText from '../../components/reactbits/SplitText/SplitText';
 import { Button } from '../../components/Button/Button';
@@ -8,7 +7,6 @@ import { links } from '../../content/site';
 import { useI18n } from '../../i18n/I18nProvider';
 import { gsap, useGSAP } from '../../lib/gsap';
 import { prefersReducedMotion } from '../../lib/media';
-import cover from '../../assets/images/unlighted-cover-900.webp';
 import './Hero.css';
 
 export function Hero() {
@@ -44,8 +42,6 @@ export function Hero() {
     },
     { scope: root }
   );
-
-  const winner = t.game.awards[0];
 
   return (
     <section ref={root} id="top" className="hero">
@@ -87,41 +83,18 @@ export function Hero() {
           textAlign="left"
         />
 
-        <div className="hero__row">
-          <div className="hero__intro">
-            <p className="hero__lead" data-hero-in>
-              {t.hero.lead}
-            </p>
-            <div className="actions" data-hero-in>
-              <Button href={links.steam} icon={<FaSteam />}>
-                {t.common.getOnSteam}
-              </Button>
-              <Button href="#contact" variant="secondary">
-                {t.common.startProject}
-              </Button>
-            </div>
+        <div className="hero__intro">
+          <p className="hero__lead" data-hero-in>
+            {t.hero.lead}
+          </p>
+          <div className="actions" data-hero-in>
+            <Button href={links.steam} icon={<FaSteam />}>
+              {t.common.getOnSteam}
+            </Button>
+            <Button href="#contact" variant="secondary">
+              {t.common.startProject}
+            </Button>
           </div>
-
-          <a
-            className="hero__feature"
-            href={links.steam}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-hero-in
-          >
-            <span className="hero__feature-art">
-              <img src={cover} alt="" width={900} height={505} />
-            </span>
-            <span className="hero__feature-text">
-              <span className="hero__feature-status mono">{t.hero.status}</span>
-              <span className="hero__feature-name">Unlighted</span>
-              <span className="hero__feature-award">
-                {winner.title} · {winner.event}
-              </span>
-            </span>
-            <LuArrowUpRight className="hero__feature-arrow" aria-hidden="true" />
-            <span className="sr-only"> {t.hero.opensSteam}</span>
-          </a>
         </div>
       </div>
     </section>
